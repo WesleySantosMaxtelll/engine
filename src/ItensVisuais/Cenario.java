@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Cenario {
 	private String planoDeFundo;
 	private int cenarioId;
+	private int idRamificacao = 0;
 	private ArrayList<Cenario> possiveisMovimentacoes = new ArrayList<Cenario>();
 	private ArrayList<LinhaDeDialogo> ramificacoesDeDialogo = new ArrayList<LinhaDeDialogo>();
 	
@@ -13,6 +14,11 @@ public class Cenario {
 
 	public void setRamificacoesDeDialogo(ArrayList<LinhaDeDialogo> ramificacoesDeDialogo) {
 		this.ramificacoesDeDialogo = ramificacoesDeDialogo;
+	}
+	public int insereNovaRamificacao() {
+		LinhaDeDialogo novaLinha = new LinhaDeDialogo(idRamificacao);
+		ramificacoesDeDialogo.add(novaLinha);
+		return idRamificacao++;
 	}
 
 	public Cenario(int cenarioId) {
@@ -29,10 +35,6 @@ public class Cenario {
 
 	public void setPossiveisMovimentacoes(ArrayList<Cenario> possiveisMovimentacoes) {
 		this.possiveisMovimentacoes = possiveisMovimentacoes;
-	}
-	
-	public ArrayList<Cenario> getCenarios() {
-		return possiveisMovimentacoes;
 	}
 	
 	public void insereNovaMovimentacao(Cenario cenario) {

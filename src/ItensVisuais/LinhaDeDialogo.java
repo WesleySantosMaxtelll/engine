@@ -2,14 +2,19 @@ package ItensVisuais;
 import itens.DialogoSequencia;
 
 public class LinhaDeDialogo {
-	private int prioridade;
+	private int id;
 	private DialogoSequencia inicio;
 	
-	public int getPrioridade() {
-		return prioridade;
+	
+	public LinhaDeDialogo(int id) {
+		this.id = id;
 	}
-	public void setPrioridade(int prioridade) {
-		this.prioridade = prioridade;
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int prioridade) {
+		this.id = prioridade;
 	}
 	public DialogoSequencia getInicio() {
 		return inicio;

@@ -50,4 +50,14 @@ public class PlanoInicial {
 		c1.insereNovaMovimentacao(c2);
 		c2.insereNovaMovimentacao(c1);
 	}
+	
+	
+	public void percorreEstrutura() {
+		for (Cenario c : cenariosCriados) {
+			System.out.print("\n"+c.getCenarioId() + "\t");
+			for (Cenario t:c.getPossiveisMovimentacoes()) {
+				System.out.print(t.getCenarioId()+" ");
+			}
+		}
+	}
 }

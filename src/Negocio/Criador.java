@@ -5,12 +5,7 @@ import ItensVisuais.PlanoInicial;
 
 public class Criador {
 	private PlanoInicial planoInicial = new PlanoInicial();
-	private static Criador criador = new Criador();
-	
-	public static Criador criarNovoJogo() {
-		return criador;
-	}
-	
+
 	public Cenario novoCenario() {
 		return planoInicial.criarNovoCenario();
 	}
@@ -23,5 +18,7 @@ public class Criador {
 		planoInicial.ligarDoisCenarios(cenarioId1, cenarioId2);
 	}
 	
-	
+	public void percorreEstrutura() {
+		planoInicial.percorreEstrutura();
+	}
 }
