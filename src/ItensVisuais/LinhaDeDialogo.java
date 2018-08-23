@@ -4,6 +4,7 @@ import itens.DialogoSequencia;
 public class LinhaDeDialogo {
 	private int prioridade;
 	private DialogoSequencia inicio;
+	
 	public int getPrioridade() {
 		return prioridade;
 	}
