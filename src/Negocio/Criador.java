@@ -6,8 +6,8 @@ import ItensVisuais.PlanoInicial;
 public class Criador {
 	private PlanoInicial planoInicial = new PlanoInicial();
 
-	public Cenario novoCenario() {
-		return planoInicial.criarNovoCenario();
+	public Cenario novoCenario(String nome) {
+		return planoInicial.criarNovoCenario(nome);
 	}
 	
 	public void deleteCenario(int cenarioId) {
@@ -20,5 +20,10 @@ public class Criador {
 	
 	public void percorreEstrutura() {
 		planoInicial.percorreEstrutura();
+	}
+	
+	
+	public int inserirNovaRamificacao(int cenarioId, String nome) {
+		return planoInicial.inserirNovaRamificacao(cenarioId, nome);
 	}
 }

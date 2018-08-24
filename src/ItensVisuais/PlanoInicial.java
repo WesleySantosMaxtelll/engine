@@ -13,8 +13,8 @@ public class PlanoInicial {
 		this.cenariosCriados = cenariosCriados;
 	}
 	
-	public Cenario criarNovoCenario() {
-		Cenario novoCenario = new Cenario(proximoCenarioId++);
+	public Cenario criarNovoCenario(String nome) {
+		Cenario novoCenario = new Cenario(proximoCenarioId++, nome);
 		insereOutroCenario(novoCenario);
 		return novoCenario;
 	}
@@ -49,6 +49,15 @@ public class PlanoInicial {
 		}
 		c1.insereNovaMovimentacao(c2);
 		c2.insereNovaMovimentacao(c1);
+	}
+	
+	public int inserirNovaRamificacao(int cenarioId, String nome) {
+		for (Cenario c : cenariosCriados) {
+			if(c.getCenarioId() == cenarioId) {
+				return c.insereNovaRamificacao(nome);
+			}
+		}
+		return -1;
 	}
 	
 	
