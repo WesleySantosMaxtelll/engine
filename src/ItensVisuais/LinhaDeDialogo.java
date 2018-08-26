@@ -5,12 +5,14 @@ public class LinhaDeDialogo {
 	private int id;
 	private String nome;
 	private DialogoSequencia inicio;
-	
+
 	
 	public LinhaDeDialogo(int id, String nome) {
 		this.id = id;
 		this.nome = nome;
 	}
+
+
 	public int getId() {
 		return id;
 	}

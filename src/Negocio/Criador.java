@@ -26,4 +26,8 @@ public class Criador {
 	public int inserirNovaRamificacao(int cenarioId, String nome) {
 		return planoInicial.inserirNovaRamificacao(cenarioId, nome);
 	}
+	
+	public void mostraRamificacoes(int cenarioId) {
+		planoInicial.mostraRamificacoes(cenarioId);
+	}
 }

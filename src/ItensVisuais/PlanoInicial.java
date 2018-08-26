@@ -60,8 +60,19 @@ public class PlanoInicial {
 		return -1;
 	}
 	
+	public void mostraRamificacoes(int cenarioId) {
+		for (Cenario c : cenariosCriados) {
+			if(c.getCenarioId() == cenarioId) {
+				for(LinhaDeDialogo l : c.getRamificacoesDeDialogo()) {
+					System.out.print(l.getNome());
+					System.out.println(l.getId());
+				}
+			}
+		}
+	}
 	
 	public void percorreEstrutura() {
+
 		for (Cenario c : cenariosCriados) {
 			System.out.print("\n"+c.getCenarioId() + "\t");
 			for (Cenario t:c.getPossiveisMovimentacoes()) {

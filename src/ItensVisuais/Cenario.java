@@ -9,6 +9,8 @@ public class Cenario {
 	private ArrayList<Cenario> possiveisMovimentacoes = new ArrayList<Cenario>();
 	private ArrayList<LinhaDeDialogo> ramificacoesDeDialogo = new ArrayList<LinhaDeDialogo>();
 	
+
+	
 	public ArrayList<LinhaDeDialogo> getRamificacoesDeDialogo() {
 		return ramificacoesDeDialogo;
 	}
@@ -34,10 +36,6 @@ public class Cenario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public int getIdRamificacao() {
-		return idRamificacao;
 	}
 
 	public int getCenarioId() {

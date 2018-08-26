@@ -13,9 +13,14 @@ public class Teste {
 		criador.ligarDoisCenarios(2, 4);
 		criador.ligarDoisCenarios(0, 1);
 		criador.ligarDoisCenarios(2, 1);
+		criador.inserirNovaRamificacao(1, "Dialogo com o pai");
+		criador.inserirNovaRamificacao(1, "Dialogo com a mae");
+		criador.inserirNovaRamificacao(1, "Dialogo com o irmao");
+		criador.insereEmRamificacao(1, "Dialogo com o pai");
 		
 //		criador.deleteCenario(2);
 //		System.out.println(c.getCenarioId());
 		criador.percorreEstrutura();
+		criador.mostraRamificacoes(1);
 	}
 }
