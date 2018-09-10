@@ -3,6 +3,7 @@ package Negocio;
 import ItensVisuais.Cenario;
 
 public class Teste {
+
 	public static void main(String[] args) {
 		Criador criador = new Criador();
 		criador.novoCenario("Sala");
@@ -13,7 +14,7 @@ public class Teste {
 		criador.ligarDoisCenarios(2, 4);
 		criador.ligarDoisCenarios(0, 1);
 		criador.ligarDoisCenarios(2, 1);
-		criador.inserirNovaRamificacao(1, "Dialogo com o pai");
+		criador.novaRamificacao(1, "Dialogo com o pai");
 		criador.inserirNovaRamificacao(1, "Dialogo com a mae");
 		criador.inserirNovaRamificacao(1, "Dialogo com o irmao");
 		criador.insereEmRamificacao(1, "Dialogo com o pai");

@@ -1,36 +1,29 @@
 package ItensVisuais;
-import itens.DialogoSequencia;
+import java.util.ArrayList;
+
+import itens.Cena;
 
 public class LinhaDeDialogo {
 	private int id;
-	private String nome;
-	private DialogoSequencia inicio;
+	private ArrayList<Cena> cenas = new ArrayList<Cena>();
 
-	
-	public LinhaDeDialogo(int id, String nome) {
+	public LinhaDeDialogo(int id) {
 		this.id = id;
-		this.nome = nome;
 	}
 
 
 	public int getId() {
 		return id;
 	}
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 	public void setId(int prioridade) {
 		this.id = prioridade;
 	}
-	public DialogoSequencia getInicio() {
-		return inicio;
-	}
-	public void setInicio(DialogoSequencia inicio) {
-		this.inicio = inicio;
+	
+	public void deletarCena(int index) {
+		cenas.remove(index);
 	}
 	
+	public void inserirNovaCena(Cena nova) {
+		cenas.add(nova);
+	}
 }

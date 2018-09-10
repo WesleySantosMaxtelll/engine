@@ -1,20 +1,20 @@
 package ItensVisuais;
 import java.util.ArrayList;
 
+import itens.Cena;
+import myExceptions.CenarioNaoEncontrado;
+
 public class PlanoInicial {
-	private int proximoCenarioId = 0;
 	private ArrayList<Cenario> cenariosCriados = new ArrayList<Cenario>();
 
+	
+	// Acoes com cenarios
 	public ArrayList<Cenario> getCenariosCriados() {
 		return cenariosCriados;
 	}
-
-	public void setCenariosCriados(ArrayList<Cenario> cenariosCriados) {
-		this.cenariosCriados = cenariosCriados;
-	}
 	
-	public Cenario criarNovoCenario(String nome) {
-		Cenario novoCenario = new Cenario(proximoCenarioId++, nome);
+	public Cenario criarNovoCenario(int id) {
+		Cenario novoCenario = new Cenario(id);
 		insereOutroCenario(novoCenario);
 		return novoCenario;
 	}
@@ -22,7 +22,6 @@ public class PlanoInicial {
 	private void insereOutroCenario(Cenario novoCenario) {
 		cenariosCriados.add(novoCenario);
 	}
-	
 	
 	public void deleteCenario(int cenarioId) {
 		for (int i = 0; i < cenariosCriados.size(); i++) {
@@ -50,21 +49,31 @@ public class PlanoInicial {
 		c1.insereNovaMovimentacao(c2);
 		c2.insereNovaMovimentacao(c1);
 	}
+	// *************************************************************
 	
-	public int inserirNovaRamificacao(int cenarioId, String nome) {
+	// Possiveis dialogos em cada cenario
+	public int inserirNovaRamificacao(int idRamificacao, int cenarioId) throws CenarioNaoEncontrado {
 		for (Cenario c : cenariosCriados) {
 			if(c.getCenarioId() == cenarioId) {
-				return c.insereNovaRamificacao(nome);
+				c.insereNovaRamificacao(idRamificacao);
 			}
 		}
-		return -1;
+		throw new CenarioNaoEncontrado("Não foi possível encontrar o cenário");
+	}
+	
+	public void deletarRamificacao(int idRamificacao, int cenarioId) throws CenarioNaoEncontrado {
+		for (Cenario c : cenariosCriados) {
+			if(c.getCenarioId() == cenarioId) {
+				c.deletarRamificacao(idRamificacao);
+			}
+		}
+		throw new CenarioNaoEncontrado("Não foi possível encontrar o cenário");
 	}
 	
 	public void mostraRamificacoes(int cenarioId) {
 		for (Cenario c : cenariosCriados) {
 			if(c.getCenarioId() == cenarioId) {
 				for(LinhaDeDialogo l : c.getRamificacoesDeDialogo()) {
-					System.out.print(l.getNome());
 					System.out.println(l.getId());
 				}
 			}
@@ -79,5 +88,12 @@ public class PlanoInicial {
 				System.out.print(t.getCenarioId()+" ");
 			}
 		}
+	}
+
+	public void inserirCena(int cenarioId, int dialogoId, Cena cena) {
+		for (Cenario c: cenariosCriados) {
+			c.getDialogo(dialogoId).inserirNovaCena(cena);
+		}
+		
 	}
 }
