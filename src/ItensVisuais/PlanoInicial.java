@@ -1,8 +1,9 @@
 package ItensVisuais;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import itens.Cena;
-import myExceptions.CenarioNaoEncontrado;
+import myExceptions.CenarioException;
 
 public class PlanoInicial {
 	private ArrayList<Cenario> cenariosCriados = new ArrayList<Cenario>();
@@ -24,25 +25,32 @@ public class PlanoInicial {
 	}
 	
 	public void deleteCenario(int cenarioId) {
-		for (int i = 0; i < cenariosCriados.size(); i++) {
-			for(int j = 0; j< cenariosCriados.get(i).getPossiveisMovimentacoes().size(); j++) {
-				if (cenariosCriados.get(i).getPossiveisMovimentacoes().get(j).getCenarioId() == cenarioId)
-					cenariosCriados.get(i).getPossiveisMovimentacoes().remove(j);
+		Iterator<Cenario> iteratorMain = cenariosCriados.iterator();
+		while(iteratorMain.hasNext()) {
+			Cenario c = iteratorMain.next();
+			if (c.getCenarioId() == cenarioId) {
+				iteratorMain.remove();
+			} else {
+				Iterator<Cenario> iteratorInner = c.getPossiveisMovimentacoes().iterator();
+				while(iteratorInner.hasNext()) {
+					Cenario possivelCenario = iteratorInner.next();
+					if (possivelCenario.getCenarioId() == cenarioId) {
+						iteratorInner.remove();
+					}
+				}
 			}
-			
-			if (cenariosCriados.get(i).getCenarioId() == cenarioId) {
-				cenariosCriados.remove(i);
-			}
+	
 		}
 	}
 	
-	public void ligarDoisCenarios(int cenarioId1, int cenarioId2) {
+	public void ligarDoisCenarios(int cenarioId1, int cenarioId2) throws CenarioException {
 		Cenario c1 = null;
 		Cenario c2 = null;
 		
 		for (Cenario c: cenariosCriados){
 			if (c.getCenarioId() == cenarioId1)
 				c1 = c;
+
 			if (c.getCenarioId() == cenarioId2)
 				c2 = c;
 		}
@@ -52,22 +60,22 @@ public class PlanoInicial {
 	// *************************************************************
 	
 	// Possiveis dialogos em cada cenario
-	public int inserirNovaRamificacao(int idRamificacao, int cenarioId) throws CenarioNaoEncontrado {
+	public int inserirNovaRamificacao(int idRamificacao, int cenarioId) throws CenarioException {
 		for (Cenario c : cenariosCriados) {
 			if(c.getCenarioId() == cenarioId) {
 				c.insereNovaRamificacao(idRamificacao);
 			}
 		}
-		throw new CenarioNaoEncontrado("Não foi possível encontrar o cenário");
+		throw new CenarioException("Não foi possível encontrar o cenário");
 	}
 	
-	public void deletarRamificacao(int idRamificacao, int cenarioId) throws CenarioNaoEncontrado {
+	public void deletarRamificacao(int idRamificacao, int cenarioId) throws CenarioException {
 		for (Cenario c : cenariosCriados) {
 			if(c.getCenarioId() == cenarioId) {
 				c.deletarRamificacao(idRamificacao);
 			}
 		}
-		throw new CenarioNaoEncontrado("Não foi possível encontrar o cenário");
+		throw new CenarioException("Não foi possível encontrar o cenário");
 	}
 	
 	public void mostraRamificacoes(int cenarioId) {

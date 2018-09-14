@@ -1,6 +1,8 @@
 package ItensVisuais;
 import java.util.ArrayList;
 
+import myExceptions.CenarioException;
+
 public class Cenario {
 	private String planoDeFundo;
 	private int cenarioId;
@@ -46,7 +48,11 @@ public class Cenario {
 		this.possiveisMovimentacoes = possiveisMovimentacoes;
 	}
 	
-	public void insereNovaMovimentacao(Cenario cenario) {
+	public void insereNovaMovimentacao(Cenario cenario) throws CenarioException {
+
+		for (Cenario c:possiveisMovimentacoes) 
+			if(c.cenarioId == cenario.getCenarioId())
+				throw new CenarioException("Cenarios já estão conectados");
 		possiveisMovimentacoes.add(cenario);
 	}
 

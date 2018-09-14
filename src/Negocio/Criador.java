@@ -8,7 +8,7 @@ import ItensVisuais.PlanoInicial;
 import itens.Cena;
 import itens.GerenciadorDeIDs;
 import itens.Personagem;
-import myExceptions.CenarioNaoEncontrado;
+import myExceptions.CenarioException;
 
 public class Criador {
 	public Criador() {
@@ -21,7 +21,7 @@ public class Criador {
 	private PlanoInicial planoInicial = new PlanoInicial();
 	
 	public void inserirCena(String cenario, String dialogo,ArrayList<Personagem> personagensNaCena, 
-			ArrayList<Mensagem> mensagensNaCena) throws CenarioNaoEncontrado {
+			ArrayList<Mensagem> mensagensNaCena) throws CenarioException {
 		Cena cena = new Cena();
 		cena.setMensagensNaCena(mensagensNaCena);
 		cena.setPersonagensNaCena(personagensNaCena);
@@ -30,22 +30,30 @@ public class Criador {
 		planoInicial.inserirCena(cenarioId, dialogoId, cena);
 	}
 	
-	public void novoCenario(String nome) {
-		int id = gerenciador.inserirNovoCenario(nome);
-		planoInicial.criarNovoCenario(id);
+	public void novoCenario(String nome) throws CenarioException {
+//		int id = gerenciador.inserirNovoCenario(nome);
+//		System.out.println(id);
+		planoInicial.criarNovoCenario(gerenciador.inserirNovoCenario(nome));
 	}
 	
-	public void novaRamificacao(String ramificacao, String cenario) throws CenarioNaoEncontrado{
+	public void novaRamificacao(String ramificacao, String cenario) throws CenarioException{
 		int cenarioId = gerenciador.getCenarioId(cenario);
 		int id = gerenciador.novaRamificacao(ramificacao, cenarioId);
 		planoInicial.inserirNovaRamificacao(id, cenarioId);
 	}
-	public void deleteCenario(int cenarioId) {
-		planoInicial.deleteCenario(cenarioId);
+	
+	public void deleteCenario(String cenario) throws CenarioException {
+		planoInicial.deleteCenario(gerenciador.deleteCenario(cenario));
 	}
 	
-	public void ligarDoisCenarios(int cenarioId1, int cenarioId2) {
+	public void ligarDoisCenarios(String cenario1, String cenario2) throws CenarioException {
+		int cenarioId1 = gerenciador.getCenarioId(cenario1);
+		int cenarioId2 = gerenciador.getCenarioId(cenario2);
 		planoInicial.ligarDoisCenarios(cenarioId1, cenarioId2);
+	}
+	
+	public void atualizaNomeCenario(String cenario, String novoNome) throws CenarioException {
+		gerenciador.atualizaNomeCenario(cenario, novoNome);
 	}
 	
 	public void percorreEstrutura() {

@@ -2,7 +2,8 @@ package itens;
 
 import java.util.ArrayList;
 
-import myExceptions.CenarioNaoEncontrado;
+import ItensVisuais.Cenario;
+import myExceptions.CenarioException;
 
 public class GerenciadorDeIDs {
 	private GerenciadorDeIDs() {
@@ -18,7 +19,6 @@ public class GerenciadorDeIDs {
 	private int ramificacaoId = 0;
 	private int cenarioId = 0;
 	
-	
 	public ArrayList<String> nomeDosCenarios() {
 		ArrayList<String> nomes = new ArrayList<String>();
 		for (IdComCenario c: cenarios) {
@@ -27,40 +27,50 @@ public class GerenciadorDeIDs {
 		return nomes;
 	}
 
-	
-	public int inserirNovoCenario(String cenario) {
+	private boolean nomeSendoUsado(String nome) throws CenarioException {
+		for (IdComCenario c: cenarios) {
+			if (c.getNome() == nome) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public int inserirNovoCenario(String cenario) throws CenarioException {
+		if(nomeSendoUsado(cenario))
+			throw new CenarioException("Nome de cenário já está sendo utilizado");
+		
 		IdComCenario novo = new IdComCenario();
 		novo.setNome(cenario);
 		novo.setId(cenarioId);
 		cenarios.add(novo);
-		return cenarioId;
+		return cenarioId++;
 	}
 	
-	public int novaRamificacao(String ramificacao, int cenarioId) throws CenarioNaoEncontrado {
+	public int novaRamificacao(String ramificacao, int cenarioId) throws CenarioException {
 		for (int i = 0; i <cenarios.size(); i++) {
 			if(cenarios.get(i).getId() == cenarioId) {
 				return cenarios.get(i).insereNovaRamificacao(ramificacao);
 			}
 		}
-		throw new CenarioNaoEncontrado("Não foi possível encontrar o cenário");
+		throw new CenarioException("Não foi possível encontrar o cenário");
 	}
 	
-	public int getCenarioId(String nome) throws CenarioNaoEncontrado {
+	public int getCenarioId(String nome) throws CenarioException {
 		for (int i = 0; i <cenarios.size(); i++) {
 			if(cenarios.get(i).getNome() == nome) {
 				return cenarios.get(i).getId();
 			}
 		}
-		throw new CenarioNaoEncontrado("Não foi possível encontrar o cenário");
+		throw new CenarioException("Não foi possível encontrar o cenário");
 	}
 	
-	public int getRamificacaoId(String nomeR, String nomeC) throws CenarioNaoEncontrado {
+	public int getRamificacaoId(String nomeR, String nomeC) throws CenarioException {
 		for (int i = 0; i <cenarios.size(); i++) {
 			if(cenarios.get(i).getNome() == nomeC) {
 				return cenarios.get(i).getRamificacaoId(nomeR);
 			}
 		}
-		throw new CenarioNaoEncontrado("Não foi possível encontrar o cenário");
+		throw new CenarioException("Não foi possível encontrar o cenário");
 	}
 	
 	public ArrayList<IdComCenario> getCenarios() {
@@ -75,7 +85,33 @@ public class GerenciadorDeIDs {
 	public void setRamificacaoId(int ramificacaoId) {
 		this.ramificacaoId = ramificacaoId;
 	}
+
 	
+	public int deleteCenario(String cenario) throws CenarioException {
+		int id;
+		for (int i = 0; i <cenarios.size(); i++) {
+			if(cenarios.get(i).getNome() == cenario) {
+				id = cenarios.get(i).getId();
+				cenarios.remove(i);
+				return id;
+			}
+		}
+		throw new CenarioException("Não foi possível encontrar o cenário");
+	}
+
+
+	public void atualizaNomeCenario(String cenario, String novoNome) throws CenarioException {
+		if(nomeSendoUsado(novoNome))
+			throw new CenarioException("Nome de cenário já está sendo utilizado");
+		
+		for (IdComCenario c: cenarios) {
+			if (c.getNome() == cenario) {
+				c.setNome(novoNome);
+				return;
+			}
+		}
+		throw new CenarioException("Não foi possível encontrar o cenário");
+	}
 }
 
 class IdComCenario{
@@ -92,12 +128,12 @@ class IdComCenario{
 		return idProxRamificacao++;
 	}
 	
-	public int getRamificacaoId(String nome) throws CenarioNaoEncontrado {
+	public int getRamificacaoId(String nome) throws CenarioException {
 		for(IdComRamificacao i: ramificacoes) {
 			if(i.getNome() == nome) 
 				return i.getId();
 		}
-		throw new CenarioNaoEncontrado("Não foi possível encontrar o dialogo");
+		throw new CenarioException("Não foi possível encontrar o dialogo");
 	}
 	public String getNome() {
 		return nome;
