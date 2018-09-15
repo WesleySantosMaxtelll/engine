@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import itens.Cena;
 import myExceptions.CenarioException;
+import myExceptions.DialogoException;
 
 public class PlanoInicial {
 	private ArrayList<Cenario> cenariosCriados = new ArrayList<Cenario>();
@@ -102,6 +103,13 @@ public class PlanoInicial {
 		for (Cenario c: cenariosCriados) {
 			c.getDialogo(dialogoId).inserirNovaCena(cena);
 		}
-		
+	}
+	
+	public void ligarCena(int cenarioId, int ramificacaoId, int idCenaAnterior, int idOpcao, int idCenaAtual) throws DialogoException {
+		for (Cenario c: cenariosCriados) {
+			if(c.getCenarioId() == cenarioId) {
+				c.getDialogo(ramificacaoId).ligarCena(idCenaAnterior, idOpcao, idCenaAtual);
+			}
+		}
 	}
 }

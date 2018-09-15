@@ -31,8 +31,6 @@ public class Criador {
 	}
 	
 	public void novoCenario(String nome) throws CenarioException {
-//		int id = gerenciador.inserirNovoCenario(nome);
-//		System.out.println(id);
 		planoInicial.criarNovoCenario(gerenciador.inserirNovoCenario(nome));
 	}
 	

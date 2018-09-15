@@ -27,6 +27,7 @@ public class Teste {
 //			System.out.println(nome);
 		
 		criador.atualizaNomeCenario("Jardim", "Piscina");
+		criador.novoCenario("Jardim");
 		for (String nome:criador.nomeDosCenarios())
 			System.out.println(nome);
 		//		criador.novoCenario("Suite");
