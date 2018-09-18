@@ -33,6 +33,11 @@ public class LinhaDeDialogo {
 		cenas.add(nova);
 	}
 	
+	public void ligarAoComeço(int idCenaAtual) throws DialogoException {
+		No novo = new No(idCenaAtual);
+		novo.setProximos(quantidadeDeOpcoes(idCenaAtual));
+		inicio = novo;
+	}
 	public void ligarCena(int idCenaAnterior, int idOpcao, int idCenaAtual) throws DialogoException {
 		No p = inicio;
 		No novo = new No(idCenaAtual);

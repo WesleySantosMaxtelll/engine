@@ -9,6 +9,7 @@ import itens.Cena;
 import itens.GerenciadorDeIDs;
 import itens.Personagem;
 import myExceptions.CenarioException;
+import myExceptions.DialogoException;
 
 public class Criador {
 	public Criador() {
@@ -34,7 +35,7 @@ public class Criador {
 		planoInicial.criarNovoCenario(gerenciador.inserirNovoCenario(nome));
 	}
 	
-	public void novaRamificacao(String ramificacao, String cenario) throws CenarioException{
+	public void novaRamificacao(String ramificacao, String cenario) throws CenarioException, DialogoException{
 		int cenarioId = gerenciador.getCenarioId(cenario);
 		int id = gerenciador.novaRamificacao(ramificacao, cenarioId);
 		planoInicial.inserirNovaRamificacao(id, cenarioId);
@@ -50,6 +51,21 @@ public class Criador {
 		planoInicial.ligarDoisCenarios(cenarioId1, cenarioId2);
 	}
 	
+	
+	public void ligarAoComeco(String cenario, String ramificacao, int idCenaAtual) throws DialogoException, CenarioException {
+		int cenarioId = gerenciador.getCenarioId(cenario);
+		int ramificacaoId = gerenciador.getRamificacaoId(ramificacao, cenario);
+		planoInicial.ligarAoComeco(cenarioId, ramificacaoId, idCenaAtual);
+	}
+	
+	public void ligarCena(String cenario, String ramificacao,
+			int idCenaAnterior, int idOpcao, int idCenaAtual) throws DialogoException, CenarioException {
+		int cenarioId = gerenciador.getCenarioId(cenario);
+		int ramificacaoId = gerenciador.getRamificacaoId(ramificacao, cenario);
+		planoInicial.ligarCena(cenarioId, ramificacaoId, idCenaAnterior, idOpcao, idCenaAtual);
+	}
+	
+	
 	public void atualizaNomeCenario(String cenario, String novoNome) throws CenarioException {
 		gerenciador.atualizaNomeCenario(cenario, novoNome);
 	}
@@ -59,8 +75,9 @@ public class Criador {
 	}
 
 	
-	public void mostraRamificacoes(int cenarioId) {
-		planoInicial.mostraRamificacoes(cenarioId);
+	public void mostraRamificacoes(String cenario) throws CenarioException {
+		int idCenario = gerenciador.getCenarioId(cenario);
+		planoInicial.mostraRamificacoes(idCenario);
 	}
 	
 	public ArrayList<String> nomeDosCenarios() {

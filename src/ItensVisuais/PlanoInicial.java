@@ -61,10 +61,11 @@ public class PlanoInicial {
 	// *************************************************************
 	
 	// Possiveis dialogos em cada cenario
-	public int inserirNovaRamificacao(int idRamificacao, int cenarioId) throws CenarioException {
+	public void inserirNovaRamificacao(int idRamificacao, int cenarioId) throws CenarioException {
 		for (Cenario c : cenariosCriados) {
 			if(c.getCenarioId() == cenarioId) {
 				c.insereNovaRamificacao(idRamificacao);
+				return;
 			}
 		}
 		throw new CenarioException("Não foi possível encontrar o cenário");
@@ -102,6 +103,14 @@ public class PlanoInicial {
 	public void inserirCena(int cenarioId, int dialogoId, Cena cena) {
 		for (Cenario c: cenariosCriados) {
 			c.getDialogo(dialogoId).inserirNovaCena(cena);
+		}
+	}
+	
+	public void ligarAoComeco(int cenarioId, int ramificacaoId, int idCenaAtual) throws DialogoException {
+		for (Cenario c: cenariosCriados) {
+			if(c.getCenarioId() == cenarioId) {
+				c.getDialogo(ramificacaoId).ligarAoComeço(idCenaAtual);
+			}
 		}
 	}
 	

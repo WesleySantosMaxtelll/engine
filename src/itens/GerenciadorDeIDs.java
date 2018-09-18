@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ItensVisuais.Cenario;
 import myExceptions.CenarioException;
+import myExceptions.DialogoException;
 
 public class GerenciadorDeIDs {
 	private GerenciadorDeIDs() {
@@ -46,7 +47,8 @@ public class GerenciadorDeIDs {
 		return cenarioId++;
 	}
 	
-	public int novaRamificacao(String ramificacao, int cenarioId) throws CenarioException {
+	public int novaRamificacao(String ramificacao, int cenarioId) throws CenarioException, DialogoException {
+		
 		for (int i = 0; i <cenarios.size(); i++) {
 			if(cenarios.get(i).getId() == cenarioId) {
 				return cenarios.get(i).insereNovaRamificacao(ramificacao);
@@ -120,7 +122,12 @@ class IdComCenario{
 	private int idProxRamificacao;
 	private ArrayList<IdComRamificacao> ramificacoes = new ArrayList<>();
 	
-	public int insereNovaRamificacao(String ramificacao) {
+	public int insereNovaRamificacao(String ramificacao) throws DialogoException {
+		for(IdComRamificacao id: ramificacoes) {
+			System.out.println(id.getNome());
+			if(id.getNome() == ramificacao)
+				throw new DialogoException("Este nome já esta sendo usado neste cenário");
+		}
 		IdComRamificacao novo = new IdComRamificacao();
 		novo.setNome(ramificacao);
 		novo.setId(idProxRamificacao);

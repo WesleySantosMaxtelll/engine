@@ -2,10 +2,13 @@ package Negocio;
 
 import ItensVisuais.Cenario;
 import myExceptions.CenarioException;
+import myExceptions.DialogoException;
 
 public class Teste {
 
-	public static void main(String[] args) throws CenarioException {
+	public static void main(String[] args) throws CenarioException, DialogoException {
+		
+		// Testar as ramificacoes
 		Criador criador = new Criador();
 		criador.novoCenario("Sala");
 		criador.novoCenario("Cozinha");
@@ -28,13 +31,17 @@ public class Teste {
 		
 		criador.atualizaNomeCenario("Jardim", "Piscina");
 		criador.novoCenario("Jardim");
-		for (String nome:criador.nomeDosCenarios())
-			System.out.println(nome);
 		//		criador.novoCenario("Suite");
 //		criador.ligarDoisCenarios(0, 1);
 //		criador.ligarDoisCenarios(2, 1);
 //		
-//		criador.novaRamificacao(1, "Dialogo com o pai");
+		criador.novaRamificacao("Dialogo com o pai", "Sala");
+		criador.novaRamificacao("Dialogo com a mae", "Sala");
+		criador.novaRamificacao("Dialogo com a mae", "Sala");
+//		for (String nome:criador.nomeDosCenarios())
+//			System.out.println(nome);
+		
+//		criador.mostraRamificacoes("Sala");
 //		criador.inserirNovaRamificacao(1, "Dialogo com a mae");
 //		criador.inserirNovaRamificacao(1, "Dialogo com o irmao");
 //		criador.insereEmRamificacao(1, "Dialogo com o pai");
