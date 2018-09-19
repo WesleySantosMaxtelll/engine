@@ -124,7 +124,6 @@ class IdComCenario{
 	
 	public int insereNovaRamificacao(String ramificacao) throws DialogoException {
 		for(IdComRamificacao id: ramificacoes) {
-			System.out.println(id.getNome());
 			if(id.getNome() == ramificacao)
 				throw new DialogoException("Este nome já esta sendo usado neste cenário");
 		}

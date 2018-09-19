@@ -21,7 +21,7 @@ public class Criador {
 	
 	private PlanoInicial planoInicial = new PlanoInicial();
 	
-	public void inserirCena(String cenario, String dialogo,ArrayList<Personagem> personagensNaCena, 
+	public void inserirCena(String cenario, String dialogo, ArrayList<Personagem> personagensNaCena, 
 			ArrayList<Mensagem> mensagensNaCena) throws CenarioException {
 		Cena cena = new Cena();
 		cena.setMensagensNaCena(mensagensNaCena);

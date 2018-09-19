@@ -1,6 +1,10 @@
 package Negocio;
 
+import java.util.ArrayList;
+
 import ItensVisuais.Cenario;
+import ItensVisuais.Mensagem;
+import itens.Personagem;
 import myExceptions.CenarioException;
 import myExceptions.DialogoException;
 
@@ -36,7 +40,7 @@ public class Teste {
 //		criador.ligarDoisCenarios(2, 1);
 //		
 		criador.novaRamificacao("Dialogo com o pai", "Sala");
-		criador.novaRamificacao("Dialogo com a mae", "Sala");
+		criador.novaRamificacao("Dialogo com a mae", "Jardim");
 		criador.novaRamificacao("Dialogo com a mae", "Sala");
 //		for (String nome:criador.nomeDosCenarios())
 //			System.out.println(nome);
@@ -50,5 +54,14 @@ public class Teste {
 //		System.out.println(c.getCenarioId());
 //		criador.percorreEstrutura();
 //		criador.mostraRamificacoes(1);
+	}
+	
+	public static void inserirCenaTeste() {
+		String cenario = "Sala";
+		String dialogo = "Dialogo com a mae";
+		ArrayList<Personagem> personagensNaCena = new ArrayList<>();
+//		Personagem p1 = new 
+//		ArrayList<Mensagem> mensagensNaCena = new ArrayList<>();
+//		
 	}
 }
