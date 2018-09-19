@@ -14,6 +14,7 @@ public class Teste {
 		
 		// Testar as ramificacoes
 		Criador criador = new Criador();
+		// Teste
 		
 		criador.novoCenario("Sala");
 		criador.novoCenario("Cozinha");
